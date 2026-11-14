@@ -9,6 +9,7 @@ on:
 
 jobs:
   build-containers-common:
+    if: github.repository == 'gitroomhq/postiz-app'
     runs-on: ubuntu-latest
     outputs:
       containerver: ${{ steps.getcontainerver.outputs.containerver }}
