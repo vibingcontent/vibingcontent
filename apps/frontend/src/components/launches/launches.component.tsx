@@ -30,7 +30,6 @@ import { useIntegrationList } from '@gitroom/frontend/components/launches/helper
 import useCookie from 'react-use-cookie';
 import { Onboarding } from '@gitroom/frontend/components/onboarding/onboarding';
 import { ChannelsAfterPayment } from '@gitroom/frontend/components/layout/check.payment';
-import { HubspotInstalled } from '@gitroom/frontend/components/launches/hubspot.installed';
 import { useModals } from '@gitroom/frontend/components/layout/new-modal';
 import { Input } from '@gitroom/react/form/input';
 import { Button } from '@gitroom/react/form/button';
@@ -62,8 +61,8 @@ export const SVGLine = () => {
           y2="-28.6843"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#662FDA" />
-          <stop offset="1" stopColor="#5720CB" />
+          <stop stopColor="#F77F00" />
+          <stop offset="1" stopColor="#E36414" />
         </linearGradient>
         <radialGradient
           id="paint1_radial_1930_1119"
@@ -73,8 +72,8 @@ export const SVGLine = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(1.19333 7.45342) rotate(21.2064) scale(16.1503 188.627)"
         >
-          <stop stopColor="#8C66FF" />
-          <stop offset="1" stopColor="#8C66FF" stopOpacity="0" />
+          <stop stopColor="#FCBF49" />
+          <stop offset="1" stopColor="#FCBF49" stopOpacity="0" />
         </radialGradient>
       </defs>
     </svg>
@@ -629,7 +628,6 @@ export const LaunchesComponent = () => {
     <DNDProvider>
       <Onboarding />
       <ChannelsAfterPayment integrations={integrations} />
-      <HubspotInstalled />
       <CalendarWeekProvider integrations={sortedIntegrations}>
         {channelsOpen && (
           <div

@@ -1,5 +1,11 @@
 'use client';
 
+import {
+  BRAND_NAME,
+  BRAND_SOURCE_URL,
+  UPSTREAM_NAME,
+  UPSTREAM_URL,
+} from '@gitroom/helpers/utils/brand';
 import { useModals } from '@gitroom/frontend/components/layout/new-modal';
 import React, {
   FC,
@@ -155,6 +161,27 @@ export const SettingsPopup: FC<{
               <LogoutComponent />
             </div>
           )}
+          {/* AGPL-3.0 attribution */}
+          <div className="mt-4 mobile:mt-[8px] text-[12px] text-textItemBlur leading-[1.5]">
+            {BRAND_NAME} is based on{' '}
+            <a
+              href={UPSTREAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-newTextColor"
+            >
+              {UPSTREAM_NAME}
+            </a>{' '}
+            (AGPL-3.0).{' '}
+            <a
+              href={BRAND_SOURCE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-newTextColor"
+            >
+              Source code
+            </a>
+          </div>
         </div>
       </div>
       <div className="bg-newBgColorInner flex-1 min-w-0 flex-col flex p-[20px] mobile:p-[12px] gap-[12px]">

@@ -1,3 +1,4 @@
+import { BRAND_NAME } from '@gitroom/helpers/utils/brand';
 import {
   AnalyticsData,
   AuthTokenDetails,
@@ -68,7 +69,7 @@ export class ThreadsProvider extends SocialAbstract implements SocialProvider {
       return {
         type: 'bad-body',
         value:
-          "One of the media URLs is invalid or inaccessible, make sure it's being uploaded to Postiz first",
+          `One of the media URLs is invalid or inaccessible, make sure it's being uploaded to ${BRAND_NAME} first`,
       };
     }
     if (body.includes('4279009')) {

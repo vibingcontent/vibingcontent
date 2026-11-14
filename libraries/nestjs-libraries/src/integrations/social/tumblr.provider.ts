@@ -1,3 +1,4 @@
+import { BRAND_NAME, BRAND_WEBSITE } from '@gitroom/helpers/utils/brand';
 import {
   AuthTokenDetails,
   PostDetails,
@@ -18,7 +19,7 @@ import { hasExtension } from '@gitroom/helpers/utils/has.extension';
 import { DashboardFunction } from '@gitroom/nestjs-libraries/integrations/dashboard.function.decorator';
 
 const TUMBLR_API_URL = 'https://api.tumblr.com/v2';
-const TUMBLR_USER_AGENT = 'Postiz/1.0 (+https://postiz.com)';
+const TUMBLR_USER_AGENT = `${BRAND_NAME.replace(/\s/g, '')}/1.0 (+${BRAND_WEBSITE})`;
 const TUMBLR_TEXT_BLOCK_LIMIT = 4096;
 const TUMBLR_DEFAULT_VIDEO_WIDTH = 540;
 const TUMBLR_DEFAULT_VIDEO_HEIGHT = 405;

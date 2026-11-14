@@ -1,5 +1,6 @@
 'use client';
 
+import { UPSTREAM_NAME } from '@gitroom/helpers/utils/brand';
 import { FC, FormEvent, useCallback, useState } from 'react';
 import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
 import { Input } from '@gitroom/react/form/input';
@@ -79,8 +80,8 @@ export const OAuthSelfHosted: FC<{
       <div className="flex flex-col gap-[4px]">
         <div className="text-[16px] font-semibold">Use self-hosted</div>
         <div className="text-[14px] text-gray-400">
-          {appName} will work with your own Postiz instance. Postiz Cloud
-          relays its requests, and your API key is stored encrypted.
+          {appName} will work with your own {UPSTREAM_NAME} instance. This
+          server relays its requests, and your API key is stored encrypted.
         </div>
       </div>
 
@@ -93,7 +94,7 @@ export const OAuthSelfHosted: FC<{
         removeError={true}
         value={instanceUrl}
         onChange={(e) => setInstanceUrl(e.target.value)}
-        placeholder="https://postiz.example.com"
+        placeholder="https://social.example.com"
         inputMode="url"
         autoComplete="off"
         spellCheck={false}
@@ -144,7 +145,7 @@ export const OAuthSelfHosted: FC<{
           disabled={
             submitting || !instanceUrl.trim() || (askEmail && !email.trim())
           }
-          className="flex-1 bg-[#612BD3] hover:bg-[#7B3FF2] disabled:opacity-50 text-white rounded-[8px] py-[10px] px-[16px] text-[14px] font-semibold transition-colors"
+          className="flex-1 bg-[#E36414] hover:bg-[#F77F00] disabled:opacity-50 text-white rounded-[8px] py-[10px] px-[16px] text-[14px] font-semibold transition-colors"
         >
           {submitting ? 'Connecting...' : 'Connect'}
         </button>

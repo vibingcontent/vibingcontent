@@ -1,3 +1,4 @@
+import { BRAND_NAME } from '@gitroom/helpers/utils/brand';
 import { CreateOrgUserDto } from '@gitroom/nestjs-libraries/dtos/auth/create.org.user.dto';
 import { HttpException, Injectable } from '@nestjs/common';
 import { OrganizationRepository } from '@gitroom/nestjs-libraries/database/prisma/organizations/organization.repository';
@@ -143,7 +144,10 @@ export class OrganizationService {
       body.email
     );
     if (!users.length) {
-      throw new HttpException('No Postiz account found for this email', 400);
+      throw new HttpException(
+        `No ${BRAND_NAME} account found for this email`,
+        400
+      );
     }
 
     if (users.length > 1) {

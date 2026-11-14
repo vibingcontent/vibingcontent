@@ -1,3 +1,4 @@
+import { BRAND_NAME } from '@gitroom/helpers/utils/brand';
 import {
   ClientInformation,
   PostDetails,
@@ -17,7 +18,7 @@ export class MastodonCustomProvider extends MastodonProvider {
 
   async externalUrl(url: string) {
     const form = new FormData();
-    form.append('client_name', 'Postiz');
+    form.append('client_name', BRAND_NAME);
     form.append(
       'redirect_uris',
       `${process.env.FRONTEND_URL}/integrations/social/mastodon`

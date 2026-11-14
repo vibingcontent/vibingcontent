@@ -1,5 +1,6 @@
 'use client';
 
+import { BRAND_NAME } from '@gitroom/helpers/utils/brand';
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
 import { timer } from '@gitroom/helpers/utils/timer';
@@ -190,7 +191,8 @@ export const FarcasterApproval: FC<{
       <div className="max-w-[400px]">
         {t(
           'farcaster_scan_instructions',
-          'Scan the QR code with your phone, or copy the link and open it on your phone, then approve Postiz in the Farcaster app.'
+          'Scan the QR code with your phone, or copy the link and open it on your phone, then approve {{brand}} in the Farcaster app.',
+          { brand: BRAND_NAME }
         )}
       </div>
       <Button onClick={copyLink}>

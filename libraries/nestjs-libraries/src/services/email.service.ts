@@ -110,6 +110,7 @@ export class EmailService {
                 border-top: 1px solid #e5e7eb;
                 padding-top: 1.5rem;
             ">
+                <img src="${process.env.FRONTEND_URL}/favicon.png" width="32" height="32" alt="" style="margin-right: 12px;" />
                 <div>
                     <h2 style="
                         font-size: 1.25rem;
