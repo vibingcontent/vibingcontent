@@ -1,3 +1,4 @@
+import { BRAND_NAME, BRAND_WEBSITE } from '@gitroom/helpers/utils/brand';
 import {
   AuthTokenDetails,
   PostDetails,
@@ -16,7 +17,7 @@ import { Rules } from '@gitroom/nestjs-libraries/chat/rules.description.decorato
 import { getSsrfSafeDispatcher } from '@gitroom/nestjs-libraries/dtos/webhooks/ssrf.safe.dispatcher';
 import { string } from 'yup';
 
-const WORDPRESS_USER_AGENT = 'Postiz/1.0 (+https://postiz.com)';
+const WORDPRESS_USER_AGENT = `${BRAND_NAME.replace(/\s/g, '')}/1.0 (+${BRAND_WEBSITE})`;
 
 @Rules(
   'WordPress publishes the content as an article: pictures go inside the content as <img src="..."> where they should appear, the src must be a picture from the media library (upload it with uploadFromUrlTool first), attachments are not published, the cover picture is the main_image setting'

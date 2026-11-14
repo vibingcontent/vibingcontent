@@ -1,5 +1,6 @@
 'use client';
 
+import { BRAND_NAME } from '@gitroom/helpers/utils/brand';
 import React, {
   FC,
   useCallback,
@@ -75,7 +76,7 @@ export const AgentChat: FC = () => {
             className="w-full h-full"
             labels={{
               title: t('your_assistant', 'Your Assistant'),
-              initial: t('agent_welcome_message', `Hello, I am your Postiz agent 🙌🏻.
+              initial: t('agent_welcome_message', `Hello, I am your {{brand}} agent 🙌🏻.
               
 I can schedule a post or multiple posts to multiple channels and generate pictures and videos.
 
@@ -84,7 +85,7 @@ You can select the channels you want to use from the left menu.
 You can see your previous conversations from the right menu.
 
 You can also use me as an MCP Server, check Settings >> Agents / Dev
-`),
+`, { brand: BRAND_NAME }),
             }}
             UserMessage={Message}
             Input={NewInput}

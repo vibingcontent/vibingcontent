@@ -1,3 +1,4 @@
+import { BRAND_NAME } from '@gitroom/helpers/utils/brand';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { OAuthRepository } from '@gitroom/nestjs-libraries/database/prisma/oauth/oauth.repository';
 import { CreateOAuthAppDto } from '@gitroom/nestjs-libraries/dtos/oauth/create-oauth-app.dto';
@@ -721,7 +722,7 @@ export class OAuthService {
     } catch (err) {
       // timeout or network failure, fetch rejects instead of answering
       throw new HttpException(
-        'Could not reach HubSpot to finish installing Postiz, please try again',
+        `Could not reach HubSpot to finish installing ${BRAND_NAME}, please try again`,
         HttpStatus.BAD_GATEWAY,
         { cause: err }
       );
@@ -730,7 +731,7 @@ export class OAuthService {
     if (!response.ok) {
       const value = await response.json().catch(() => null);
       throw new HttpException(
-        `Could not finish installing Postiz in HubSpot${
+        `Could not finish installing ${BRAND_NAME} in HubSpot${
           value?.message ? `: ${value.message}` : ''
         }`,
         HttpStatus.BAD_REQUEST

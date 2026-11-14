@@ -1,5 +1,6 @@
 'use client';
 
+import { BRAND_NAME } from '@gitroom/helpers/utils/brand';
 import { FC, useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useDecisionModal } from '@gitroom/frontend/components/layout/new-modal';
@@ -21,12 +22,15 @@ export const HubspotInstalled: FC = () => {
     shown.current = true;
     (async () => {
       await modal.open({
-        title: t('hubspot_installed', 'Postiz is installed in HubSpot'),
+        title: t('hubspot_installed', '{{brand}} is installed in HubSpot', {
+          brand: BRAND_NAME,
+        }),
         onlyApprove: true,
         approveLabel: t('ok', 'OK'),
         description: t(
           'hubspot_installed_description',
-          'Connect the channels you want to post to here in Postiz. Then, in HubSpot, open Agent Hub > Agent Builder, add a tool, pick Postiz MCP under MCP Servers and click Connect and add.'
+          'Connect the channels you want to post to here in {{brand}}. Then, in HubSpot, open Agent Hub > Agent Builder, add a tool, pick {{brand}} MCP under MCP Servers and click Connect and add.',
+          { brand: BRAND_NAME }
         ),
       });
       // like Onboarding, drop the param once closed so a calendar reload
