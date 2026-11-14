@@ -37,19 +37,40 @@ export class TiktokProvider extends SocialAbstract implements SocialProvider {
   name = 'Tiktok';
   isBetweenSteps = false;
   convertToJPEG = true;
-  scopes = [
-    'video.list',
-    'user.info.basic',
-    'video.publish',
-    'video.upload',
-    'user.info.profile',
-    'user.info.stats',
-  ];
+  // TIKTOK_SCOPES (comma-separated) limits the request to the scopes the TikTok
+  // app is approved for: TikTok rejects the whole sign-in if one requested scope
+  // isn't approved. Unset, all the scopes below are requested.
+  scopes = process.env.TIKTOK_SCOPES
+    ? process.env.TIKTOK_SCOPES.split(',')
+        .map((scope) => scope.trim())
+        .filter(Boolean)
+    : [
+        'video.list',
+        'user.info.basic',
+        'video.publish',
+        'video.upload',
+        'user.info.profile',
+        'user.info.stats',
+      ];
   override maxConcurrentJob = 10000;
   dto = TikTokDto;
   editor = 'normal' as const;
   maxLength() {
     return 2000;
+  }
+
+  // TikTok only accepts the redirect URIs registered for the app, and adding one
+  // re-triggers the app review. TIKTOK_REDIRECT_URI lets an install keep its
+  // registered URI (and forward it to /integrations/social/tiktok itself).
+  private redirectUri() {
+    return `${
+      process?.env?.FRONTEND_URL?.indexOf('https') === -1
+        ? 'https://redirectmeto.com/'
+        : ''
+    }${
+      process?.env?.TIKTOK_REDIRECT_URI ||
+      `${process?.env?.FRONTEND_URL}/integrations/social/tiktok`
+    }`;
   }
 
   override async checkValidity(
@@ -346,13 +367,7 @@ export class TiktokProvider extends SocialAbstract implements SocialProvider {
       url:
         'https://www.tiktok.com/v2/auth/authorize/' +
         `?client_key=${process.env.TIKTOK_CLIENT_ID}` +
-        `&redirect_uri=${encodeURIComponent(
-          `${
-            process?.env?.FRONTEND_URL?.indexOf('https') === -1
-              ? 'https://redirectmeto.com/'
-              : ''
-          }${process?.env?.FRONTEND_URL}/integrations/social/tiktok`
-        )}` +
+        `&redirect_uri=${encodeURIComponent(this.redirectUri())}` +
         `&state=${state}` +
         `&response_type=code` +
         `&scope=${encodeURIComponent(this.scopes.join(','))}`,
@@ -372,11 +387,7 @@ export class TiktokProvider extends SocialAbstract implements SocialProvider {
       code: params.code,
       grant_type: 'authorization_code',
       code_verifier: params.codeVerifier,
-      redirect_uri: `${
-        process?.env?.FRONTEND_URL?.indexOf('https') === -1
-          ? 'https://redirectmeto.com/'
-          : ''
-      }${process?.env?.FRONTEND_URL}/integrations/social/tiktok`,
+      redirect_uri: this.redirectUri(),
     };
 
     const { access_token, refresh_token, scope } = await (
